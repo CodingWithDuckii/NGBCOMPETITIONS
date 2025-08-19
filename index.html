@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGB: Competitions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ffcc00',
+                        dark: '#0f172a',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .glow {
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0% {
+                text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(255, 204, 0, 1);
+            }
+            100% {
+                text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+            }
+        }
+        
+        .section-divider {
+            border-bottom: 1px solid rgba(255, 204, 0, 0.2);
+        }
+        
+        .discord-btn:hover {
+            background-color: #5865F2 !important;
+        }
+    </style>
+</head>
+<body class="bg-dark text-gray-100 min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="py-6 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl sm:text-3xl font-bold text-primary">NGB: Competitions</h1>
+            <div class="flex space-x-4">
+                <a href="#" class="text-gray-300 hover:text-primary transition"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-300 hover:text-primary transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-gray-300 hover:text-primary transition"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8 flex-grow">
+        <div class="container mx-auto max-w-4xl text-center">
+            <div class="bg-gray-800 bg-opacity-50 rounded-xl p-8 shadow-lg backdrop-blur-sm border border-gray-700">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-6">Διαγωνισμός Ink Game</h2>
+                
+                <!-- Event Details -->
+                <div class="mb-8 space-y-3 text-lg">
+                    <div class="flex items-center justify-center space-x-2">
+                        <i class="fas fa-calendar-alt text-primary"></i>
+                        <span>Ημερομηνία: <strong>19 Αυγούστου 2025</strong></span>
+                    </div>
+                    <div class="flex items-center justify-center space-x-2">
+                        <i class="fas fa-clock text-primary"></i>
+                        <span>Ώρα: <strong>17:00 (ώρα Ελλάδας)</strong></span>
+                    </div>
+                    <div class="flex items-center justify-center space-x-2">
+                        <i class="fas fa-gamepad text-primary"></i>
+                        <span>Παιχνίδι: <strong>Ink Game</strong></span>
+                    </div>
+                    <div class="flex items-center justify-center space-x-2">
+                        <i class="fas fa-trophy text-primary"></i>
+                        <span>Έπαθλο: <strong>5 Ευρώ στον νικητή</strong></span>
+                    </div>
+                </div>
+                
+                <!-- Description -->
+                <p class="text-gray-300 mb-8 text-lg">
+                    Την Τρίτη 19 Αυγούστου 2025 στις 17:00 ώρα Ελλάδας, η NGB: Competitions διοργανώνει έναν διαγωνισμό στο Ink Game! Ο νικητής κερδίζει 5 Ευρώ.
+                </p>
+                
+                <!-- Countdown Timer -->
+                <div id="countdown-container" class="mb-8">
+                    <p class="text-gray-300 mb-4">Ο διαγωνισμός ξεκινά στις 19 Αυγούστου 2025, ώρα 17:00 (Ελλάδα).</p>
+                    <div class="flex justify-center space-x-2 sm:space-x-4">
+                        <div class="bg-gray-700 rounded-lg p-3 w-20">
+                            <div id="days" class="text-3xl font-bold text-primary">00</div>
+                            <div class="text-xs text-gray-400">ΗΜΕΡΕΣ</div>
+                        </div>
+                        <div class="bg-gray-700 rounded-lg p-3 w-20">
+                            <div id="hours" class="text-3xl font-bold text-primary">00</div>
+                            <div class="text-xs text-gray-400">ΩΡΕΣ</div>
+                        </div>
+                        <div class="bg-gray-700 rounded-lg p-3 w-20">
+                            <div id="minutes" class="text-3xl font-bold text-primary">00</div>
+                            <div class="text-xs text-gray-400">ΛΕΠΤΑ</div>
+                        </div>
+                        <div class="bg-gray-700 rounded-lg p-3 w-20">
+                            <div id="seconds" class="text-3xl font-bold text-primary">00</div>
+                            <div class="text-xs text-gray-400">ΔΕΥΤΕΡΑ</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Active Event (hidden by default) -->
+                <div id="active-event" class="hidden mb-8">
+                    <h3 class="text-4xl font-bold text-primary pulse-glow mb-2">NOW ACTIVE</h3>
+                    <p class="text-2xl font-semibold">Ink Game!</p>
+                </div>
+                
+                <!-- Participation Note -->
+                <div class="mb-8">
+                    <p class="text-gray-300 mb-4">
+                         👉 <span class="text-primary">Για να συμμετάσχεις στον διαγωνισμό, μπες στο Discord server μας:</span>
+                    </p>
+                    <a href="https://discord.gg/UUc49wBQ7z" target="_blank" class="inline-block bg-[#5865F2] hover:bg-[#4752C4] text-white px-6 py-3 rounded-lg font-medium transition discord-btn">
+                        <i class="fab fa-discord mr-2"></i> Join Discord
+                    </a>
+                </div>
+                
+                <!-- CTA Button -->
+                <a href="https://www.roblox.com/games/99567941238278/SKY-SQUID-GAMES-Ink-Game#!/about" target="_blank" class="inline-block bg-primary hover:bg-yellow-400 text-gray-900 px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-primary/30 transition-all transform hover:scale-105">
+                    Μάθε Περισσότερα
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rules Section -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8 bg-gray-900 bg-opacity-50 section-divider">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-8 text-center">Κανόνες Διαγωνισμού</h2>
+            <div class="grid gap-4 sm:grid-cols-2">
+                <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg border border-gray-700">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 text-primary mr-4">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Ανοιχτός σε όλους</h3>
+                            <p class="text-gray-300">Ο διαγωνισμός είναι ανοιχτός σε όλους.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg border border-gray-700">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 text-primary mr-4">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Κριτήριο Νίκης</h3>
+                            <p class="text-gray-300">Ο νικητής είναι ο τελευταίος παίκτης που θα παραμείνει στο παιχνίδι.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg border border-gray-700">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 text-primary mr-4">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Απαγορεύονται</h3>
+                            <p class="text-gray-300">Απαγορεύονται τα cheats, exploits ή άδικες τακτικές.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg border border-gray-700">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 text-primary mr-4">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Επαθλο</h3>
+                            <p class="text-gray-300">Ο νικητής θα ενημερωθεί άμεσα για την παραλαβή του επάθλου.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 sm:px-6 lg:px-8 bg-gray-900 mt-auto">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-400">© 2025 NGB: Competitions –  Όλα τα δικαιώματα διατηρούνται.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-primary transition"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition"><i class="fab fa-facebook fa-lg"></i></a>
+                    <a href="https://discord.gg/UUc49wBQ7z" target="_blank" class="text-gray-400 hover:text-[#5865F2] transition"><i class="fab fa-discord fa-lg"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const eventDate = new Date('August 19, 2025 17:00:00 GMT+0300').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+            
+            if (distance < 0) {
+                // Event has started
+                document.getElementById('countdown-container').classList.add('hidden');
+                document.getElementById('active-event').classList.remove('hidden');
+                return;
+            }
+            
+            // Calculate time units
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Update display
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
